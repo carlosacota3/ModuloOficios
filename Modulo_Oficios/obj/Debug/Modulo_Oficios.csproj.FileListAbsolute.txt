@@ -1,0 +1,39 @@
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.exe.config
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.exe
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.pdb
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csprojAssemblyReference.cache
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.frm_oficios.resources
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.Properties.Resources.resources
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csproj.GenerateResource.cache
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csproj.CoreCompileInputs.cache
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.exe
+C:\Users\carlo\Documents\Visual Studio 2017\Projects\Servicio_social\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.pdb
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.exe.config
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.exe
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.pdb
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.exe
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.pdb
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\mscorlib.dll
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\System.Net.Http.dll
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\System.Net.Http.xml
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\es\mscorlib.resources.dll
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\es\System.Net.Http.resources.dll
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\normidna.nlp
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\normnfc.nlp
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\normnfd.nlp
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\normnfkc.nlp
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\bin\Debug\normnfkd.nlp
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csprojResolveAssemblyReference.cache
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.frm_oficios.resources
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.Properties.Resources.resources
+C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csproj.GenerateResource.Cache
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.exe.config
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.exe
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\bin\Debug\Modulo_Oficios.pdb
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csprojAssemblyReference.cache
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.frm_oficios.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.Properties.Resources.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csproj.GenerateResource.cache
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csproj.CoreCompileInputs.cache
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.exe
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.pdb
