@@ -9,24 +9,45 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Data;
+using Modulo_Oficios.Properties; //Para usar los recursos de la solucion, en este caso los iconos de los botones
 
 namespace Modulo_Oficios
 {
     public partial class frm_oficios : Form
     {
-		bool datos_mostrados = false; 
+		bool datos_mostrados = false;
+        bool id_selec = false;
 
-        public frm_oficios()
+        //Constructor
+        public frm_oficios(string id_selecc, char accion)
         {
             InitializeComponent();
-        }
 
-        private void frm_oficios_Load(object sender, EventArgs e)
-        {
+            txt_id.Text = id_selecc;
+            //Llenar ComboBox
             Conexion Conex = new Conexion();
             Conex.llenarDependencias(cmb_dependencias);
             Conex.llenarTipo(cmb_tipo);
             Conex.llenarEstados(cmb_estado);
+            Conex.ConexionClose();
+
+            if (accion == 'A')
+                rb_registrar.Checked = true;
+            else if (accion == 'B' && id_selecc != "")
+            {
+                rb_eliminar.Checked = true;
+                mostrar_oficio(); //manda llamar al metodo que traera los datos de la BD para ser desplegados al abrir el formulario
+            }
+            else if (accion == 'C' && id_selecc != "")
+            {
+                rb_modificar.Checked = true;
+                mostrar_oficio(); //manda llamar al metodo que traera los datos de la BD para ser desplegados al abrir el formulario
+            }
+        }
+
+        private void frm_oficios_Load(object sender, EventArgs e)
+        {
+            
         }
 
         private void rb_registrar_CheckedChanged(object sender, EventArgs e)
@@ -48,6 +69,7 @@ namespace Modulo_Oficios
                 cmb_estado.Enabled = true;
                 cmb_tipo.Enabled = true;
                 btn_accion.ForeColor = Color.Black;
+                btn_accion.Image = Resources.lista_reducida;
             }
         }
 
@@ -64,6 +86,7 @@ namespace Modulo_Oficios
                 cmb_estado.Enabled = false;
                 cmb_tipo.Enabled = false;
                 btn_accion.ForeColor = Color.Black;
+                btn_accion.Image = Resources.lista_reducida;
             }
         }
 
@@ -107,6 +130,82 @@ namespace Modulo_Oficios
             dtp_recibido.Value = DateTime.Today;
             txt_id.Focus();
             btn_accion.ForeColor = Color.Black;
+            if (rb_eliminar.Checked || rb_modificar.Checked)
+                btn_accion.Image = Resources.lista_reducida;
+            else if (rb_registrar.Checked)
+                btn_accion.Image = Resources.guardar_reducido;
+        }
+
+        private void mostrar_oficio()
+        {
+            Conexion c = new Conexion();
+            //Se van a mostrar los datos del oficio
+            SqlCommand cmdConsultar = new SqlCommand("select * from Oficio where Id='" + txt_id.Text + "'", c.conn);
+            SqlDataReader rdr = cmdConsultar.ExecuteReader();
+            if (rdr.HasRows)
+            {
+                while (rdr.Read())
+                {
+                    //El asunto
+                    txt_asunto.Text = rdr["Asunto"].ToString();
+                    //Guarda los Id de los 3 datos siguientes
+                    string id_dependencia = rdr["id_dependencia"].ToString();
+                    string id_tipo = rdr["id_tipo"].ToString();
+                    string id_estado = rdr["id_estado"].ToString();
+                    //Las fechas
+                    dtp_envio.Value = Convert.ToDateTime(rdr["Fecha_envio"]);
+                    dtp_recibido.Value = Convert.ToDateTime(rdr["Fecha_recibido"]);
+                    rdr.Close(); //Cerrar el datareader
+
+                    //Muestra la Dependencia
+                    SqlCommand cmdDependencia = new SqlCommand("Select Nombre from Dependencia where id = " + id_dependencia + ";", c.conn);
+                    SqlDataReader reader = cmdDependencia.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cmb_dependencias.Text = id_dependencia + "-" + reader["Nombre"].ToString();
+                    }
+                    reader.Close();
+
+                    //Muestra el Tipo
+                    SqlCommand cmdTipo = new SqlCommand("Select Nombre from Tipo where id = " + id_tipo + ";", c.conn);
+                    reader = cmdTipo.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cmb_tipo.Text = id_tipo + "-" + reader["Nombre"].ToString();
+                    }
+                    reader.Close();
+
+                    //Muestra el Estado
+                    SqlCommand cmdEstado = new SqlCommand("Select Nombre from Estado where id = " + id_estado + ";", c.conn);
+                    reader = cmdEstado.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        cmb_estado.Text = id_estado + "-" + reader["Nombre"].ToString();
+                    }
+                    reader.Close();
+                    if (rb_eliminar.Checked)
+                    {
+                        btn_accion.Text = "Eliminar Oficio";
+                        btn_accion.ForeColor = Color.Red;
+                        btn_accion.Image = Resources.limpiar_rojo_reducido; //Cambia el icono del boton, desde una imagen en los recursos del proyecto
+                    }
+                    else if (rb_modificar.Checked)
+                    {
+                        btn_accion.Text = "Guardar Cambios";
+                        btn_accion.Image = Resources.guardar_reducido; //Cambia el icono del boton, desde una imagen en los recursos del proyecto
+                    }
+                    txt_id.Enabled = false;
+                    datos_mostrados = true; //Indicamos que los datos ya se muestran para ahora proceder a eliminar
+                    break; //Salimos del ciclo, porque el rdr ya esta cerrado y probablemente da error en el siguiente loop
+                }
+            }
+            else
+            {
+                MessageBox.Show("No hay datos que coincidan con la busqueda");
+                rdr.Close(); //Cerrar el datareader
+            }
+
+            c.ConexionClose(); //Cerrar la conexion
         }
 
         private void btn_accion_Click(object sender, EventArgs e)
@@ -132,6 +231,10 @@ namespace Modulo_Oficios
                 else if (cmb_estado.Text == "")
                 {
                     MessageBox.Show("Falta seleccionar Estado");
+                }
+                else if (dtp_recibido.Value < dtp_envio.Value)
+                {
+                    MessageBox.Show("La Fecha de Recibido no puede ser anterior a la Fecha de Envio");
                 }
                 else
                 {
@@ -189,71 +292,9 @@ namespace Modulo_Oficios
                 {
                     MessageBox.Show("Tienes que ingresar el Id para continuar");
                 }
-                else if (datos_mostrados == false)
+                else if (datos_mostrados == false) //Primero se despliegan los datos del oficio a los campos del formulario
                 {
-					Conexion c = new Conexion();
-                    //Se van a mostrar los datos del oficio
-                    SqlCommand cmdConsultar = new SqlCommand("select * from Oficio where Id='" + txt_id.Text + "'", c.conn);
-                    SqlDataReader rdr = cmdConsultar.ExecuteReader();
-                    if (rdr.HasRows)
-                    {
-                        while (rdr.Read())
-                        {
-                            //El asunto
-                            txt_asunto.Text = rdr["Asunto"].ToString();
-                            //Guarda los Id de los 3 datos siguientes
-                            string id_dependencia = rdr["id_dependencia"].ToString();
-                            string id_tipo = rdr["id_tipo"].ToString();
-                            string id_estado = rdr["id_estado"].ToString();
-                            //Las fechas
-                            dtp_envio.Value = Convert.ToDateTime(rdr["Fecha_envio"]);
-                            dtp_recibido.Value = Convert.ToDateTime(rdr["Fecha_recibido"]);
-                            rdr.Close(); //Cerrar el datareader
-
-                            //Muestra la Dependencia
-                            SqlCommand cmdDependencia = new SqlCommand("Select Nombre from Dependencia where id = " + id_dependencia + ";", c.conn);
-                            SqlDataReader reader = cmdDependencia.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                cmb_dependencias.Text = id_dependencia + "-" + reader["Nombre"].ToString();
-                            }
-                            reader.Close();
-
-                            //Muestra el Tipo
-                            SqlCommand cmdTipo = new SqlCommand("Select Nombre from Tipo where id = " + id_tipo + ";", c.conn);
-                            reader = cmdTipo.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                cmb_tipo.Text = id_tipo + "-" + reader["Nombre"].ToString();
-                            }
-                            reader.Close();
-
-                            //Muestra el Estado
-                            SqlCommand cmdEstado = new SqlCommand("Select Nombre from Estado where id = " + id_estado + ";", c.conn);
-                            reader = cmdEstado.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                cmb_estado.Text = id_estado + "-" + reader["Nombre"].ToString();
-                            }
-                            reader.Close();
-
-                            btn_accion.Text = "Eliminar Oficio";
-                            btn_accion.ForeColor = Color.Red;
-                            txt_id.Enabled = false;
-                            datos_mostrados = true; //Indicamos que los datos ya se muestran para ahora proceder a eliminar
-                            break; //Salimos del ciclo, porque el rdr ya esta cerrado y probablemente da error en el siguiente loop
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No hay datos que coincidan con la busqueda");
-                        rdr.Close(); //Cerrar el datareader
-                    }
-                     
-                    c.ConexionClose(); //Cerrar la conexion
-
-
-
+                    mostrar_oficio(); //manda llamar al metodo que traera los datos de la BD
                 }
                 else if (datos_mostrados == true) //Aqui ya procede a eliminar
                 {
@@ -277,64 +318,7 @@ namespace Modulo_Oficios
                 }
                 else if (datos_mostrados == false)
                 {
-                    Conexion c = new Conexion();
-                    //Se van a mostrar los datos del oficio
-                    SqlCommand cmdConsultar = new SqlCommand("select * from Oficio where Id='" + txt_id.Text + "'", c.conn);
-                    SqlDataReader rdr = cmdConsultar.ExecuteReader();
-                    if (rdr.HasRows)
-                    {
-                        while (rdr.Read())
-                        {
-                            //El asunto
-                            txt_asunto.Text = rdr["Asunto"].ToString();
-                            //Guarda los Id de los 3 datos siguientes
-                            string id_dependencia = rdr["id_dependencia"].ToString();
-                            string id_tipo = rdr["id_tipo"].ToString();
-                            string id_estado = rdr["id_estado"].ToString();
-                            //Las fechas
-                            dtp_envio.Value = Convert.ToDateTime(rdr["Fecha_envio"]);
-                            dtp_recibido.Value = Convert.ToDateTime(rdr["Fecha_recibido"]);
-                            rdr.Close(); //Cerrar el datareader
-
-                            //Muestra la Dependencia
-                            SqlCommand cmdDependencia = new SqlCommand("Select Nombre from Dependencia where id = " + id_dependencia + ";", c.conn);
-                            SqlDataReader reader = cmdDependencia.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                cmb_dependencias.Text = id_dependencia + "-" + reader["Nombre"].ToString();
-                            }
-                            reader.Close();
-
-                            //Muestra el Tipo
-                            SqlCommand cmdTipo = new SqlCommand("Select Nombre from Tipo where id = " + id_tipo + ";", c.conn);
-                            reader = cmdTipo.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                cmb_tipo.Text = id_tipo + "-" + reader["Nombre"].ToString();
-                            }
-                            reader.Close();
-
-                            //Muestra el Estado
-                            SqlCommand cmdEstado = new SqlCommand("Select Nombre from Estado where id = " + id_estado + ";", c.conn);
-                            reader = cmdEstado.ExecuteReader();
-                            while (reader.Read())
-                            {
-                                cmb_estado.Text = id_estado + "-" + reader["Nombre"].ToString();
-                            }
-                            reader.Close();
-
-                            btn_accion.Text = "Modificar Oficio";
-                            datos_mostrados = true; //Indicamos que los datos ya se muestran para ahora proceder a eliminar
-                            txt_id.Enabled = false;
-                            break; //Salimos del ciclo, porque el rdr ya esta cerrado y probablemente da error en el siguiente loop
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("No hay datos que coincidan con la busqueda");
-                        rdr.Close(); //Cerrar el datareader
-                    }
-                    c.ConexionClose(); //Cerrar la conexion
+                    mostrar_oficio(); //manda llamar al metodo que traera los datos de la BD
                 }
                 else if (datos_mostrados == true) //Aqui se modificaran los datos
                 {
@@ -345,7 +329,8 @@ namespace Modulo_Oficios
                     sql += "Fecha_recibido = '" + dtp_recibido.Value.Date.ToString("yyyy-MM-dd")+ "', ";
                     sql += "id_dependencia = '" + obtenerId(cmb_dependencias.Text) + "', ";
                     sql += "id_tipo = '" + obtenerId(cmb_tipo.Text) + "', ";
-                    sql += "id_estado = '" + obtenerId(cmb_estado.Text) + "';";
+                    sql += "id_estado = '" + obtenerId(cmb_estado.Text) + "'";
+                    sql += "where id = " + txt_id.Text;
 
 
                     SqlCommand cmdConsultar = new SqlCommand(sql, c.conn);
@@ -374,12 +359,25 @@ namespace Modulo_Oficios
                 cmb_estado.Enabled = true;
                 cmb_tipo.Enabled = true;
                 btn_accion.ForeColor = Color.Black;
+                btn_accion.Image = Resources.guardar_reducido;
             }
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Program.filtros.Show();
+            Program.filtros.llenarDataGrid("");
+            this.Close();
+        }
+
+        private void frm_oficios_FormClosing(object sender, FormClosedEventArgs e)
+        {
+            Program.filtros.Show();
         }
     }
 }

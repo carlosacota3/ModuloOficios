@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.Data;
 
 namespace Modulo_Oficios
 {
@@ -27,7 +28,43 @@ namespace Modulo_Oficios
                 MessageBox.Show("No se logro establecer la conexion con la BD.");
             }
         }
+        //Metodo Select
+        public DataTable Select(String Valores, String Tabla)
+        {
+            DataTable table = new DataTable();
+            try
+            {
+                String SQL = "Select " + Valores + " from " + Tabla;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(SQL, conn);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                table.Clear();
+            }
+            return table;
+        }
+        //Metodo Select con Where
+        public DataTable Select(String Valores, String Tabla, String Condicion)
+        {
 
+            DataTable table = new DataTable();
+            try
+            {
+                String SQL = "Select " + Valores + " from " + Tabla + " where " + Condicion;
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(SQL, conn);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(dataAdapter);
+                dataAdapter.Fill(table);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                table.Clear();
+            }
+            return table;
+        }
         // Llena el combo box Dependencias
         public void llenarDependencias(ComboBox cb)
         {

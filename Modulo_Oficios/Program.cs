@@ -11,12 +11,14 @@ namespace Modulo_Oficios
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>
+
+        public static frm_filtros filtros; //Instanciamos el formulario principal
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_oficios());
+            Application.Run(filtros = new frm_filtros()); //y aqui lo mandamos ejecutar
         }
     }
 }
