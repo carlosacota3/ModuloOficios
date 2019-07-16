@@ -20,7 +20,9 @@ namespace Modulo_Oficios
         {
             try
             {
-                conn = new SqlConnection("Data Source=.;Initial Catalog=oficios;Integrated Security=True");
+                string value;
+                value = Environment.GetEnvironmentVariable("servidor_BD"); //Esta variable se tiene que crear en las variables del sistema
+                conn = new SqlConnection("Data Source=" + value + ";Initial Catalog=oficios;Integrated Security=True");
                 conn.Open();
             }
             catch(Exception ex)
@@ -83,7 +85,7 @@ namespace Modulo_Oficios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se lleno el ComboBox " + ex.ToString());   
+                //MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
             }
         }
 
@@ -105,7 +107,7 @@ namespace Modulo_Oficios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
+                //MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
             }
         }
 
@@ -127,7 +129,7 @@ namespace Modulo_Oficios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
+                //MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
             }
         }
 

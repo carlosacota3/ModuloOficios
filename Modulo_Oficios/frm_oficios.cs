@@ -64,12 +64,16 @@ namespace Modulo_Oficios
                 datos_mostrados = false;
                 txt_asunto.Enabled = true;
                 dtp_envio.Enabled = true;
-                dtp_recibido.Enabled = true;
+                if (chb_fecha_respuesta.CheckState == CheckState.Checked)
+                    dtp_recibido.Enabled = true;
+                else if (chb_fecha_respuesta.CheckState == CheckState.Unchecked)
+                    dtp_recibido.Enabled = false;
                 cmb_dependencias.Enabled = true;
                 cmb_estado.Enabled = true;
                 cmb_tipo.Enabled = true;
                 btn_accion.ForeColor = Color.Black;
                 btn_accion.Image = Resources.lista_reducida;
+                chb_fecha_respuesta.Enabled = true;
             }
         }
 
@@ -87,6 +91,7 @@ namespace Modulo_Oficios
                 cmb_tipo.Enabled = false;
                 btn_accion.ForeColor = Color.Black;
                 btn_accion.Image = Resources.lista_reducida;
+                chb_fecha_respuesta.Enabled = false;
             }
         }
 
@@ -130,6 +135,8 @@ namespace Modulo_Oficios
             dtp_recibido.Value = DateTime.Today;
             txt_id.Focus();
             btn_accion.ForeColor = Color.Black;
+            chb_fecha_respuesta.CheckState = CheckState.Checked;
+            dtp_recibido.Enabled = true;
             if (rb_eliminar.Checked || rb_modificar.Checked)
                 btn_accion.Image = Resources.lista_reducida;
             else if (rb_registrar.Checked)
@@ -154,7 +161,15 @@ namespace Modulo_Oficios
                     string id_estado = rdr["id_estado"].ToString();
                     //Las fechas
                     dtp_envio.Value = Convert.ToDateTime(rdr["Fecha_envio"]);
-                    dtp_recibido.Value = Convert.ToDateTime(rdr["Fecha_recibido"]);
+                    if (rdr["Fecha_recibido"] != DBNull.Value) //puede ser que aun no haya fecha de respuesta
+                    {
+                        dtp_recibido.Value = Convert.ToDateTime(rdr["Fecha_recibido"]);
+                    }
+                    else
+                    {
+                        chb_fecha_respuesta.CheckState = CheckState.Unchecked;
+                        dtp_recibido.Enabled = false;
+                    }
                     rdr.Close(); //Cerrar el datareader
 
                     //Muestra la Dependencia
@@ -232,9 +247,9 @@ namespace Modulo_Oficios
                 {
                     MessageBox.Show("Falta seleccionar Estado");
                 }
-                else if (dtp_recibido.Value < dtp_envio.Value)
+                else if ((dtp_recibido.Value < dtp_envio.Value) && (chb_fecha_respuesta.CheckState ==  CheckState.Checked))
                 {
-                    MessageBox.Show("La Fecha de Recibido no puede ser anterior a la Fecha de Envio");
+                    MessageBox.Show("La Fecha de Respuesta no puede ser anterior a la Fecha de Envio");
                 }
                 else
                 {
@@ -267,13 +282,24 @@ namespace Modulo_Oficios
                     {
                         rdr.Close();//Se cierra el rdr que usamos para verificar el id
                         //Almacenar los datos en la BD
-                        sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, Fecha_recibido, id_dependencia, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @fecha_recibido, @dependencia, @tipo, @estado)";
+
+                        //Si hay fecha de respuesta se guardara en la BD
+                        if (chb_fecha_respuesta.CheckState == CheckState.Checked)
+                        {
+                            sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, Fecha_recibido, id_dependencia, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @fecha_recibido, @dependencia, @tipo, @estado)";
+                            
+                        }
+                        else //Si no la hay, no se enviara nada
+                        {
+                            sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, id_dependencia, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @dependencia, @tipo, @estado)";
+                        }
                         comando = new SqlCommand(sql, c.conn);
 
                         comando.Parameters.AddWithValue("@id", txt_id.Text);
                         comando.Parameters.AddWithValue("@asunto", txt_asunto.Text);
                         comando.Parameters.AddWithValue("@fecha_envio", dtp_envio.Value.Date);
-                        comando.Parameters.AddWithValue("@fecha_recibido", dtp_recibido.Value.Date);
+                        if (chb_fecha_respuesta.CheckState == CheckState.Checked)
+                            comando.Parameters.AddWithValue("@fecha_recibido", dtp_recibido.Value.Date);
                         comando.Parameters.AddWithValue("@dependencia", obtenerId(cmb_dependencias.Text));
                         comando.Parameters.AddWithValue("@tipo", obtenerId(cmb_tipo.Text));
                         comando.Parameters.AddWithValue("@estado", obtenerId(cmb_estado.Text));
@@ -326,12 +352,12 @@ namespace Modulo_Oficios
 
                     string sql = "update Oficio set Asunto = '" + txt_asunto.Text +"', ";
                     sql += "Fecha_envio = '" + dtp_envio.Value.Date.ToString("yyyy-MM-dd") + "', ";
-                    sql += "Fecha_recibido = '" + dtp_recibido.Value.Date.ToString("yyyy-MM-dd")+ "', ";
+                    if (chb_fecha_respuesta.CheckState == CheckState.Checked) //Modificar fecha de respuesta en cambio de que se check el checkedbuton
+                       sql += "Fecha_recibido = '" + dtp_recibido.Value.Date.ToString("yyyy-MM-dd")+ "', ";
                     sql += "id_dependencia = '" + obtenerId(cmb_dependencias.Text) + "', ";
                     sql += "id_tipo = '" + obtenerId(cmb_tipo.Text) + "', ";
                     sql += "id_estado = '" + obtenerId(cmb_estado.Text) + "'";
-                    sql += "where id = " + txt_id.Text;
-
+                    sql += "where id = '" + txt_id.Text + "'";
 
                     SqlCommand cmdConsultar = new SqlCommand(sql, c.conn);
                     cmdConsultar.ExecuteNonQuery();
@@ -354,12 +380,16 @@ namespace Modulo_Oficios
                 datos_mostrados = false;
                 txt_asunto.Enabled = true;
                 dtp_envio.Enabled = true;
-                dtp_recibido.Enabled = true;
+                if (chb_fecha_respuesta.CheckState == CheckState.Checked)
+                    dtp_recibido.Enabled = true;
+                else if (chb_fecha_respuesta.CheckState == CheckState.Unchecked)
+                    dtp_recibido.Enabled = false;
                 cmb_dependencias.Enabled = true;
                 cmb_estado.Enabled = true;
                 cmb_tipo.Enabled = true;
                 btn_accion.ForeColor = Color.Black;
                 btn_accion.Image = Resources.guardar_reducido;
+                chb_fecha_respuesta.Enabled = true;
             }
         }
 
@@ -378,6 +408,18 @@ namespace Modulo_Oficios
         private void frm_oficios_FormClosing(object sender, FormClosedEventArgs e)
         {
             Program.filtros.Show();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chb_fecha_respuesta.CheckState == CheckState.Checked)
+            {
+                dtp_recibido.Enabled = true;
+            }
+            else if (chb_fecha_respuesta.CheckState == CheckState.Unchecked)
+            {
+                dtp_recibido.Enabled = false;
+            }
         }
     }
 }

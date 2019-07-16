@@ -359,7 +359,7 @@ namespace Modulo_Oficios
             }
             else
             {
-                MessageBox.Show("Seleccione al menos un Filtro de busqueda");
+                llenarDataGrid("");
             }
         }
 
@@ -367,16 +367,5 @@ namespace Modulo_Oficios
         {
             limpiarCampos();
         }
-
-        private void btn_mostrar_todo_Click(object sender, EventArgs e)
-        {
-            llenarDataGrid("");
-        }
-
-        
-
-        
-        
-
     }
 }

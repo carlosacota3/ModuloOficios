@@ -53,6 +53,7 @@
             this.btn_regresar = new System.Windows.Forms.Button();
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_accion = new System.Windows.Forms.Button();
+            this.chb_fecha_respuesta = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -142,6 +143,7 @@
             this.cmb_dependencias.Location = new System.Drawing.Point(170, 396);
             this.cmb_dependencias.Name = "cmb_dependencias";
             this.cmb_dependencias.Size = new System.Drawing.Size(565, 24);
+            this.cmb_dependencias.Sorted = true;
             this.cmb_dependencias.TabIndex = 5;
             // 
             // cmb_tipo
@@ -153,6 +155,7 @@
             this.cmb_tipo.Location = new System.Drawing.Point(170, 452);
             this.cmb_tipo.Name = "cmb_tipo";
             this.cmb_tipo.Size = new System.Drawing.Size(191, 24);
+            this.cmb_tipo.Sorted = true;
             this.cmb_tipo.TabIndex = 6;
             // 
             // cmb_estado
@@ -163,6 +166,7 @@
             this.cmb_estado.Location = new System.Drawing.Point(544, 455);
             this.cmb_estado.Name = "cmb_estado";
             this.cmb_estado.Size = new System.Drawing.Size(191, 24);
+            this.cmb_estado.Sorted = true;
             this.cmb_estado.TabIndex = 7;
             // 
             // groupBox1
@@ -229,21 +233,21 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(168, 299);
+            this.label4.Location = new System.Drawing.Point(150, 299);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 17);
+            this.label4.Size = new System.Drawing.Size(106, 17);
             this.label4.TabIndex = 3;
-            this.label4.Text = "Fecha Envio";
+            this.label4.Text = "Fecha de Envio";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(546, 299);
+            this.label5.Location = new System.Drawing.Point(541, 299);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(106, 17);
+            this.label5.Size = new System.Drawing.Size(139, 17);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Fecha Recibido";
+            this.label5.Text = "Fecha de Respuesta";
             // 
             // dtp_envio
             // 
@@ -298,6 +302,19 @@
             this.btn_accion.UseVisualStyleBackColor = true;
             this.btn_accion.Click += new System.EventHandler(this.btn_accion_Click);
             // 
+            // chb_fecha_respuesta
+            // 
+            this.chb_fecha_respuesta.AutoSize = true;
+            this.chb_fecha_respuesta.Checked = true;
+            this.chb_fecha_respuesta.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chb_fecha_respuesta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.chb_fecha_respuesta.Location = new System.Drawing.Point(527, 301);
+            this.chb_fecha_respuesta.Name = "chb_fecha_respuesta";
+            this.chb_fecha_respuesta.Size = new System.Drawing.Size(15, 14);
+            this.chb_fecha_respuesta.TabIndex = 34;
+            this.chb_fecha_respuesta.UseVisualStyleBackColor = true;
+            this.chb_fecha_respuesta.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
             // frm_oficios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
@@ -305,6 +322,7 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(829, 658);
+            this.Controls.Add(this.chb_fecha_respuesta);
             this.Controls.Add(this.btn_regresar);
             this.Controls.Add(this.dtp_recibido);
             this.Controls.Add(this.dtp_envio);
@@ -364,6 +382,7 @@
         private System.Windows.Forms.DateTimePicker dtp_envio;
         private System.Windows.Forms.Button btn_regresar;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.CheckBox chb_fecha_respuesta;
     }
 }
 
