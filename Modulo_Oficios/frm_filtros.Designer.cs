@@ -45,12 +45,12 @@
             this.chb_rango = new System.Windows.Forms.CheckBox();
             this.rb_f_recibido = new System.Windows.Forms.RadioButton();
             this.rb_f_envio = new System.Windows.Forms.RadioButton();
-            this.btn_limpiar = new System.Windows.Forms.Button();
-            this.btn_buscar = new System.Windows.Forms.Button();
+            this.btn_generar_rpt = new System.Windows.Forms.Button();
             this.btn_modificar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.btn_eliminar = new System.Windows.Forms.Button();
-            this.btn_generar_rpt = new System.Windows.Forms.Button();
+            this.btn_limpiar = new System.Windows.Forms.Button();
+            this.btn_buscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_oficios)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -237,35 +237,21 @@
             this.rb_f_envio.UseVisualStyleBackColor = true;
             this.rb_f_envio.CheckedChanged += new System.EventHandler(this.rb_f_envio_CheckedChanged_1);
             // 
-            // btn_limpiar
+            // btn_generar_rpt
             // 
-            this.btn_limpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btn_limpiar.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu;
-            this.btn_limpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_limpiar.Location = new System.Drawing.Point(417, 307);
-            this.btn_limpiar.Name = "btn_limpiar";
-            this.btn_limpiar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_limpiar.Size = new System.Drawing.Size(404, 36);
-            this.btn_limpiar.TabIndex = 15;
-            this.btn_limpiar.Text = "Limpiar";
-            this.btn_limpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_limpiar.UseVisualStyleBackColor = true;
-            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
-            // 
-            // btn_buscar
-            // 
-            this.btn_buscar.Image = global::Modulo_Oficios.Properties.Resources.lupa2_reducida;
-            this.btn_buscar.Location = new System.Drawing.Point(418, 264);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(403, 36);
-            this.btn_buscar.TabIndex = 14;
-            this.btn_buscar.Text = "Buscar";
-            this.btn_buscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_buscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_buscar.UseVisualStyleBackColor = true;
-            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            this.btn_generar_rpt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_generar_rpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.btn_generar_rpt.Image = global::Modulo_Oficios.Properties.Resources.reporte_reducido;
+            this.btn_generar_rpt.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_generar_rpt.Location = new System.Drawing.Point(417, 326);
+            this.btn_generar_rpt.Name = "btn_generar_rpt";
+            this.btn_generar_rpt.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_generar_rpt.Size = new System.Drawing.Size(404, 36);
+            this.btn_generar_rpt.TabIndex = 16;
+            this.btn_generar_rpt.Text = "Generar Reporte";
+            this.btn_generar_rpt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_generar_rpt.UseVisualStyleBackColor = true;
+            this.btn_generar_rpt.Click += new System.EventHandler(this.btn_generar_rpt_Click);
             // 
             // btn_modificar
             // 
@@ -309,21 +295,35 @@
             this.btn_eliminar.UseVisualStyleBackColor = true;
             this.btn_eliminar.Click += new System.EventHandler(this.btn_eliminar_Click);
             // 
-            // btn_generar_rpt
+            // btn_limpiar
             // 
-            this.btn_generar_rpt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_generar_rpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btn_generar_rpt.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu;
-            this.btn_generar_rpt.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_generar_rpt.Location = new System.Drawing.Point(417, 345);
-            this.btn_generar_rpt.Name = "btn_generar_rpt";
-            this.btn_generar_rpt.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_generar_rpt.Size = new System.Drawing.Size(404, 36);
-            this.btn_generar_rpt.TabIndex = 16;
-            this.btn_generar_rpt.Text = "Generar Reporte";
-            this.btn_generar_rpt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_generar_rpt.UseVisualStyleBackColor = true;
-            this.btn_generar_rpt.Click += new System.EventHandler(this.btn_generar_rpt_Click);
+            this.btn_limpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.btn_limpiar.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu1;
+            this.btn_limpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_limpiar.Location = new System.Drawing.Point(417, 284);
+            this.btn_limpiar.Name = "btn_limpiar";
+            this.btn_limpiar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_limpiar.Size = new System.Drawing.Size(404, 36);
+            this.btn_limpiar.TabIndex = 15;
+            this.btn_limpiar.Text = "Limpiar";
+            this.btn_limpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
+            // 
+            // btn_buscar
+            // 
+            this.btn_buscar.Image = global::Modulo_Oficios.Properties.Resources.lupa2_reducida1;
+            this.btn_buscar.Location = new System.Drawing.Point(418, 241);
+            this.btn_buscar.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_buscar.Name = "btn_buscar";
+            this.btn_buscar.Size = new System.Drawing.Size(403, 36);
+            this.btn_buscar.TabIndex = 14;
+            this.btn_buscar.Text = "Buscar";
+            this.btn_buscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_buscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_buscar.UseVisualStyleBackColor = true;
+            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
             // 
             // frm_filtros
             // 

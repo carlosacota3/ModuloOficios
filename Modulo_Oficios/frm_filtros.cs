@@ -381,7 +381,7 @@ namespace Modulo_Oficios
         {
             frm_reporte r = new frm_reporte(tabla_filtrada);
             r.Show();
-            Program.filtros.Hide(); //El "filtros" es el formulario frm_filtros, esto se especifico en el archivo "Program.cs"
+            //Program.filtros.Hide(); //El "filtros" es el formulario frm_filtros, esto se especifico en el archivo "Program.cs"
         }
     }
 }

@@ -52,8 +52,8 @@ namespace Modulo_Oficios
 
         private void frm_reporte_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Program.filtros.Show();
-            Program.filtros.llenarDataGrid("");
+            //Program.filtros.Show();
+            //Program.filtros.llenarDataGrid("");
         }
     }
 }

@@ -133,9 +133,29 @@ namespace Modulo_Oficios.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap lupa2 {
+            get {
+                object obj = ResourceManager.GetObject("lupa2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap lupa2_reducida {
             get {
                 object obj = ResourceManager.GetObject("lupa2_reducida", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap lupa2_reducida1 {
+            get {
+                object obj = ResourceManager.GetObject("lupa2_reducida1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -173,6 +193,16 @@ namespace Modulo_Oficios.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap reinicio_redu1 {
+            get {
+                object obj = ResourceManager.GetObject("reinicio_redu1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap reinicio_reduc {
             get {
                 object obj = ResourceManager.GetObject("reinicio_reduc", resourceCulture);
@@ -186,6 +216,26 @@ namespace Modulo_Oficios.Properties {
         internal static System.Drawing.Bitmap reinicio_reducida {
             get {
                 object obj = ResourceManager.GetObject("reinicio_reducida", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reporte_reducido {
+            get {
+                object obj = ResourceManager.GetObject("reporte_reducido", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap reporte_reducido1 {
+            get {
+                object obj = ResourceManager.GetObject("reporte_reducido1", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
