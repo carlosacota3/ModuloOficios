@@ -36,8 +36,15 @@
     <ApplicationIcon>icono.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,6 +57,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="Data_Set.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Data_Set.xsd</DependentUpon>
+    </Compile>
     <Compile Include="frm_oficios.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -62,6 +74,12 @@
     <Compile Include="frm_filtros.Designer.cs">
       <DependentUpon>frm_filtros.cs</DependentUpon>
     </Compile>
+    <Compile Include="frm_reporte.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_reporte.Designer.cs">
+      <DependentUpon>frm_reporte.cs</DependentUpon>
+    </Compile>
     <Compile Include="oficiosDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -69,11 +87,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="reporte_oficios.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>reporte_oficios.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <EmbeddedResource Include="frm_oficios.resx">
       <DependentUpon>frm_oficios.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frm_filtros.resx">
       <DependentUpon>frm_filtros.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frm_reporte.resx">
+      <DependentUpon>frm_reporte.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -85,6 +112,21 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="reporte_oficios.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>reporte_oficios.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Data_Set.xsc">
+      <DependentUpon>Data_Set.xsd</DependentUpon>
+    </None>
+    <None Include="Data_Set.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Data_Set.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data_Set.xss">
+      <DependentUpon>Data_Set.xsd</DependentUpon>
+    </None>
     <None Include="oficiosDataSet.xsc">
       <DependentUpon>oficiosDataSet.xsd</DependentUpon>
     </None>
@@ -124,6 +166,9 @@
     <None Include="icono\regresar_reducida.png" />
     <None Include="icono\guardar_reducido.png" />
     <None Include="icono\limpiar_red.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

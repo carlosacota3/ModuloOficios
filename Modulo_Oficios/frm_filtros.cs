@@ -13,8 +13,13 @@ namespace Modulo_Oficios
 {
     public partial class frm_filtros : Form
     {
+        //NOTA NOTA NOTA: todo lo que se nombre como f_recibido, en realidad deberia de ser f_respuesta
+        //ya que hace referencia a la fecha de respuesta, antes fecha de recibido, pero por una actualizacion
+        //se corrigio ese error y el nombre real es FECHA DE RESPUESTA
         string id_seleccionado = ""; //El id que se seleccione del Data View Grid
+                                                                               //f_recibido hace referencia a la Fecha de Respuesta
         bool dependencia = false, tipo = false, estado = false, f_envio = false, f_recibido = false, rango = false;
+        DataTable tabla_filtrada = new DataTable();
 
         public frm_filtros()
         {
@@ -32,7 +37,7 @@ namespace Modulo_Oficios
             
             Conexion c = new Conexion();
             //Se especifica aun lado de cada atributo, de que tabla se van a extraer
-            string valores = "Oficio.id as 'Id', Oficio.Asunto, Oficio.Fecha_envio as 'Fecha Envio', Oficio.Fecha_recibido as 'Fecha Recibido', Dependencia.Nombre as 'Dependencia', Tipo.Nombre as ' Tipo', Estado.Nombre as 'Estado'";
+            string valores = "Oficio.id as 'Id', Oficio.Asunto, Oficio.Fecha_envio as 'Fecha Envio', Oficio.Fecha_recibido as 'Fecha Respuesta', Dependencia.Nombre as 'Dependencia', Tipo.Nombre as 'Tipo', Estado.Nombre as 'Estado'";
             //Esta cadena funcionara como vista, para traer el NOMBRE y no el ID de Dependencia, Tipo y Estado
             string from = "Oficio INNER JOIN ";
             from += "	     Tipo ON Oficio.id_tipo = Tipo.id ";
@@ -42,11 +47,14 @@ namespace Modulo_Oficios
             from += "         Estado ON Oficio.id_estado = Estado.id";
             if (where == "")
             {
-                dgv_oficios.DataSource = c.Select(valores, from);
+                tabla_filtrada = c.Select(valores, from);
+                dgv_oficios.DataSource = tabla_filtrada;
+                
             }
             else
             {
-                dgv_oficios.DataSource = c.Select(valores, from, where);
+                tabla_filtrada = c.Select(valores, from, where);
+                dgv_oficios.DataSource = tabla_filtrada;
             }
             dgv_oficios.Columns[0].Width = 60;
             dgv_oficios.Columns[1].Width = 140;
@@ -84,6 +92,7 @@ namespace Modulo_Oficios
             dtp_final.Value = DateTime.Today;
             chb_rango.Checked = false;
             chb_rango.Enabled = false;
+            tabla_filtrada.Clear();
         }
         private void verificarChecks()
         {
@@ -234,7 +243,7 @@ namespace Modulo_Oficios
                 f_envio = false;
             }
         }
-
+        //El radiobutton f_recibido realmente deberia de ser f_respuesta
         private void rb_f_recibido_CheckedChanged_1(object sender, EventArgs e)
         {
             if (rb_f_recibido.Checked == true)
@@ -290,7 +299,7 @@ namespace Modulo_Oficios
                 {
                     if ((dtp_final.Value < dtp_inicio.Value) && (chb_rango.Checked))
                     {
-                        MessageBox.Show("La Fecha de Recibido no puede ser anterior a la Fecha de Envio");
+                        MessageBox.Show("La Fecha de Respuesta no puede ser anterior a la Fecha de Envio");
                     }
                     else
                     {
@@ -366,6 +375,13 @@ namespace Modulo_Oficios
         private void btn_limpiar_Click(object sender, EventArgs e)
         {
             limpiarCampos();
+        }
+
+        private void btn_generar_rpt_Click(object sender, EventArgs e)
+        {
+            frm_reporte r = new frm_reporte(tabla_filtrada);
+            r.Show();
+            Program.filtros.Hide(); //El "filtros" es el formulario frm_filtros, esto se especifico en el archivo "Program.cs"
         }
     }
 }

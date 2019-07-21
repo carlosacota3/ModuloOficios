@@ -37,3 +37,4 @@ C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.ex
 C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.pdb
 C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.csprojResolveAssemblyReference.cache
 C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.frm_filtros.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Debug\Modulo_Oficios.frm_reporte.resources

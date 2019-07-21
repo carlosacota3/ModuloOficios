@@ -50,6 +50,7 @@
             this.btn_modificar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.btn_eliminar = new System.Windows.Forms.Button();
+            this.btn_generar_rpt = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_oficios)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -308,11 +309,28 @@
             this.btn_eliminar.UseVisualStyleBackColor = true;
             this.btn_eliminar.Click += new System.EventHandler(this.btn_eliminar_Click);
             // 
+            // btn_generar_rpt
+            // 
+            this.btn_generar_rpt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_generar_rpt.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.btn_generar_rpt.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu;
+            this.btn_generar_rpt.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_generar_rpt.Location = new System.Drawing.Point(417, 345);
+            this.btn_generar_rpt.Name = "btn_generar_rpt";
+            this.btn_generar_rpt.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_generar_rpt.Size = new System.Drawing.Size(404, 36);
+            this.btn_generar_rpt.TabIndex = 16;
+            this.btn_generar_rpt.Text = "Generar Reporte";
+            this.btn_generar_rpt.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_generar_rpt.UseVisualStyleBackColor = true;
+            this.btn_generar_rpt.Click += new System.EventHandler(this.btn_generar_rpt_Click);
+            // 
             // frm_filtros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 710);
+            this.Controls.Add(this.btn_generar_rpt);
             this.Controls.Add(this.btn_limpiar);
             this.Controls.Add(this.btn_buscar);
             this.Controls.Add(this.groupBox2);
@@ -365,5 +383,6 @@
         private System.Windows.Forms.Label lbl_fecha_final;
         private System.Windows.Forms.Label lbl_fecha_inicio;
         private System.Windows.Forms.CheckBox chb_rango;
+        private System.Windows.Forms.Button btn_generar_rpt;
     }
 }

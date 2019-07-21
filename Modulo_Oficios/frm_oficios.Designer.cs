@@ -143,7 +143,6 @@
             this.cmb_dependencias.Location = new System.Drawing.Point(170, 396);
             this.cmb_dependencias.Name = "cmb_dependencias";
             this.cmb_dependencias.Size = new System.Drawing.Size(565, 24);
-            this.cmb_dependencias.Sorted = true;
             this.cmb_dependencias.TabIndex = 5;
             // 
             // cmb_tipo
