@@ -91,7 +91,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(57, 379);
+            this.label6.Location = new System.Drawing.Point(57, 355);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
             this.label6.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(117, 529);
+            this.label7.Location = new System.Drawing.Point(117, 505);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 17);
             this.label7.TabIndex = 6;
@@ -111,7 +111,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(471, 532);
+            this.label8.Location = new System.Drawing.Point(471, 508);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 17);
             this.label8.TabIndex = 7;
@@ -141,7 +141,7 @@
             this.cmb_tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmb_tipo.FormattingEnabled = true;
             this.cmb_tipo.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.cmb_tipo.Location = new System.Drawing.Point(170, 526);
+            this.cmb_tipo.Location = new System.Drawing.Point(170, 502);
             this.cmb_tipo.Name = "cmb_tipo";
             this.cmb_tipo.Size = new System.Drawing.Size(191, 24);
             this.cmb_tipo.Sorted = true;
@@ -152,7 +152,7 @@
             this.cmb_estado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmb_estado.FormattingEnabled = true;
-            this.cmb_estado.Location = new System.Drawing.Point(544, 529);
+            this.cmb_estado.Location = new System.Drawing.Point(544, 505);
             this.cmb_estado.Name = "cmb_estado";
             this.cmb_estado.Size = new System.Drawing.Size(191, 24);
             this.cmb_estado.Sorted = true;
@@ -213,7 +213,7 @@
             // dtp_recibido
             // 
             this.dtp_recibido.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dtp_recibido.Location = new System.Drawing.Point(441, 322);
+            this.dtp_recibido.Location = new System.Drawing.Point(441, 298);
             this.dtp_recibido.Name = "dtp_recibido";
             this.dtp_recibido.Size = new System.Drawing.Size(321, 23);
             this.dtp_recibido.TabIndex = 4;
@@ -222,7 +222,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(150, 299);
+            this.label4.Location = new System.Drawing.Point(150, 275);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(106, 17);
             this.label4.TabIndex = 3;
@@ -232,7 +232,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(541, 299);
+            this.label5.Location = new System.Drawing.Point(541, 275);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(139, 17);
             this.label5.TabIndex = 4;
@@ -241,7 +241,7 @@
             // dtp_envio
             // 
             this.dtp_envio.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.dtp_envio.Location = new System.Drawing.Point(60, 322);
+            this.dtp_envio.Location = new System.Drawing.Point(60, 298);
             this.dtp_envio.Name = "dtp_envio";
             this.dtp_envio.Size = new System.Drawing.Size(321, 23);
             this.dtp_envio.TabIndex = 3;
@@ -266,7 +266,7 @@
             this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btn_limpiar.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu;
             this.btn_limpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_limpiar.Location = new System.Drawing.Point(247, 658);
+            this.btn_limpiar.Location = new System.Drawing.Point(247, 634);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btn_limpiar.Size = new System.Drawing.Size(362, 35);
@@ -282,7 +282,7 @@
             this.btn_accion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btn_accion.Image = global::Modulo_Oficios.Properties.Resources.guardar_reducido;
             this.btn_accion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_accion.Location = new System.Drawing.Point(247, 585);
+            this.btn_accion.Location = new System.Drawing.Point(247, 561);
             this.btn_accion.Name = "btn_accion";
             this.btn_accion.Size = new System.Drawing.Size(362, 52);
             this.btn_accion.TabIndex = 8;
@@ -297,7 +297,7 @@
             this.chb_fecha_respuesta.Checked = true;
             this.chb_fecha_respuesta.CheckState = System.Windows.Forms.CheckState.Checked;
             this.chb_fecha_respuesta.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.chb_fecha_respuesta.Location = new System.Drawing.Point(527, 301);
+            this.chb_fecha_respuesta.Location = new System.Drawing.Point(527, 277);
             this.chb_fecha_respuesta.Name = "chb_fecha_respuesta";
             this.chb_fecha_respuesta.Size = new System.Drawing.Size(15, 14);
             this.chb_fecha_respuesta.TabIndex = 34;
@@ -306,13 +306,15 @@
             // 
             // lb_dependencias
             // 
+            this.lb_dependencias.Cursor = System.Windows.Forms.Cursors.Default;
             this.lb_dependencias.FormattingEnabled = true;
             this.lb_dependencias.ItemHeight = 20;
-            this.lb_dependencias.Location = new System.Drawing.Point(170, 379);
+            this.lb_dependencias.Location = new System.Drawing.Point(170, 355);
             this.lb_dependencias.Name = "lb_dependencias";
             this.lb_dependencias.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lb_dependencias.Size = new System.Drawing.Size(565, 104);
+            this.lb_dependencias.Size = new System.Drawing.Size(565, 124);
             this.lb_dependencias.TabIndex = 35;
+            this.lb_dependencias.SelectedIndexChanged += new System.EventHandler(this.lb_dependencias_SelectedIndexChanged);
             // 
             // frm_oficios
             // 
@@ -320,7 +322,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(829, 710);
+            this.ClientSize = new System.Drawing.Size(829, 681);
             this.Controls.Add(this.lb_dependencias);
             this.Controls.Add(this.chb_fecha_respuesta);
             this.Controls.Add(this.btn_regresar);

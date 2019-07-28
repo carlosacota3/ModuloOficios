@@ -17,7 +17,10 @@ namespace Modulo_Oficios
     {
 		bool datos_mostrados = false;
         bool id_selec = false;
-
+        bool seleccion = true;
+        //Esta lista es para guardar las dependecias seleccionadas cuando el rb elminar este seleccionado
+        //para evitar que se hagan modificaciones en el listbox
+        List<string> DepsSeleccionadas = new List<string>();
         //Constructor
         public frm_oficios(string id_selecc, char accion)
         {
@@ -86,7 +89,7 @@ namespace Modulo_Oficios
                 txt_asunto.Enabled = false;
                 dtp_envio.Enabled = false;
                 dtp_recibido.Enabled = false;
-                lb_dependencias.Enabled = false;
+                lb_dependencias.Enabled = true;
                 cmb_estado.Enabled = false;
                 cmb_tipo.Enabled = false;
                 btn_accion.ForeColor = Color.Black;
@@ -128,7 +131,9 @@ namespace Modulo_Oficios
         {
             txt_id.Clear();
             txt_asunto.Clear();
+            seleccion = false; //para que no se ejecute lo que esta dentro de lb_dependencias_SelectedIndexChanged
             lb_dependencias.ClearSelected();
+            seleccion = true; //dejamos la variable como estaba
             cmb_tipo.SelectedIndex = -1;
             cmb_estado.SelectedIndex = -1;
             dtp_envio.Value = DateTime.Today;
@@ -141,6 +146,7 @@ namespace Modulo_Oficios
                 btn_accion.Image = Resources.lista_reducida;
             else if (rb_registrar.Checked)
                 btn_accion.Image = Resources.guardar_reducido;
+            DepsSeleccionadas.Clear();
         }
 
         private void mostrar_oficio()
@@ -182,8 +188,11 @@ namespace Modulo_Oficios
                         {
                             int index = lb_dependencias.FindString(rdr["dependencia_id"].ToString());
                             if (index != -1)
+                            {
                                 lb_dependencias.SetSelected(index, true);
-                            //SqlCommand cmdDependencia = new SqlCommand("Select Nombre from Dependencia where id = " + rdr["dependencia_id"].ToString() + ";", c.conn);
+                                //Si vamos a elminar se hara un respaldo de los elementos seleccionados para que no se puedan modificar en el listbox
+                                DepsSeleccionadas.Add(rdr["dependencia_id"].ToString());
+                            }
                         }
                     }
                     rdr.Close();
@@ -301,8 +310,10 @@ namespace Modulo_Oficios
                         }
                         //Agregamos las sentencias INSERT para las dependencias seleccionadas en el ListBox, a una variable
                         foreach (var item in lb_dependencias.SelectedItems)
-                        {                     //Importante ese espacio al principio de la cadena
-                            sqlDependencias += " INSERT INTO dependencia_oficio (oficio_id, dependencia_id) VALUES (" + txt_id.Text + ", " + item.ToString() + ")";
+                        {                     
+                            var arr = item.ToString().Split('-'); //Dividimos la cadena en 2 partes, en el id y el nombre de la dependencia
+                                                //Importante ese espacio al principio de la cadena
+                            sqlDependencias += " INSERT INTO dependencia_oficio (oficio_id, dependencia_id) VALUES ('" + txt_id.Text + "', " + arr[0] + ");";
                         }
 
                         comando = new SqlCommand(sql, c.conn);
@@ -314,19 +325,19 @@ namespace Modulo_Oficios
                             comando.Parameters.AddWithValue("@fecha_recibido", dtp_recibido.Value.Date);
                         comando.Parameters.AddWithValue("@tipo", obtenerId(cmb_tipo.Text));
                         comando.Parameters.AddWithValue("@estado", obtenerId(cmb_estado.Text));
-                        try
-                        {
+                        //try
+                        //{
+                            SqlCommand comandoDeps = new SqlCommand(sqlDependencias, c.conn);
                             comando.ExecuteNonQuery();
-                            comando = new SqlCommand(sqlDependencias, c.conn);
-                            comando.ExecuteNonQuery();
+                            comandoDeps.ExecuteNonQuery();
                             MessageBox.Show("Registro Exitoso");
                             //Limpiar campos
                             limpiarCampos();
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("Fallo al realizar el registro");
-                        }
+                        //}
+                        //catch (Exception ex)
+                        //{
+                        //    MessageBox.Show("Fallo al realizar el registro. " + ex.ToString());
+                        //}
                         c.ConexionClose();
 
                     }
@@ -370,11 +381,28 @@ namespace Modulo_Oficios
                 {
                     Conexion c = new Conexion();
 
+                    
+                    //No fue la mejor manera de hacerlo pero fue la mas facil que se me ocurrio en el momento
+                    //Borramos los registros de dependecias que tenga este oficio, y mas abajo los volvemos a registrar
+                    //esto por si se agregaron o quitaron dependencias al oficio, del listbox
+                    SqlCommand cmdDependencias = new SqlCommand("delete dependencia_oficio where oficio_id = '" + txt_id.Text + "';", c.conn);
+                    cmdDependencias.ExecuteNonQuery();
+                    string sqlDependencias = "";
+                    //Agregamos las sentencias INSERT para las dependencias seleccionadas en el ListBox, a una variable
+                    foreach (var item in lb_dependencias.SelectedItems)
+                    {                     
+                        var arr = item.ToString().Split('-'); //Dividimos la cadena en 2 partes, en el id y el nombre de la dependencia
+                                            //Importante ese espacio al principio de la cadena
+                        sqlDependencias += " INSERT INTO dependencia_oficio (oficio_id, dependencia_id) VALUES ('" + txt_id.Text + "', " + arr[0] + ");";
+                    }
+
+                    cmdDependencias = new SqlCommand(sqlDependencias, c.conn);
+                    cmdDependencias.ExecuteNonQuery();
+
                     string sql = "update Oficio set Asunto = '" + txt_asunto.Text +"', ";
                     sql += "Fecha_envio = '" + dtp_envio.Value.Date.ToString("yyyy-MM-dd") + "', ";
                     if (chb_fecha_respuesta.CheckState == CheckState.Checked) //Modificar fecha de respuesta en cambio de que se check el checkedbuton
                        sql += "Fecha_recibido = '" + dtp_recibido.Value.Date.ToString("yyyy-MM-dd")+ "', ";
-                    sql += "id_dependencia = '" + obtenerId(cmb_dependencias.Text) + "', ";
                     sql += "id_tipo = '" + obtenerId(cmb_tipo.Text) + "', ";
                     sql += "id_estado = '" + obtenerId(cmb_estado.Text) + "'";
                     sql += "where id = '" + txt_id.Text + "'";
@@ -439,6 +467,26 @@ namespace Modulo_Oficios
             else if (chb_fecha_respuesta.CheckState == CheckState.Unchecked)
             {
                 dtp_recibido.Enabled = false;
+            }
+        }
+
+        private void lb_dependencias_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //Evitar que cuando el rb eliminar este seleccionado se puedan modificar las selecciones del listbox
+            if (rb_eliminar.Checked && datos_mostrados == true && seleccion == true)
+            {
+                seleccion = false; //si no tuviera esta variable, se ciclaria en este metodo ya que al seleccionar un nuevo elemento
+                                    //en el for each se estaria volviendo a llamar a este metodo
+                lb_dependencias.ClearSelected();
+                foreach (var item in DepsSeleccionadas)
+                {
+                    int index = lb_dependencias.FindString(item.ToString());
+                    if (index != -1)
+                    {
+                        lb_dependencias.SetSelected(index, true);
+                    }
+                }
+                seleccion = true;
             }
         }
     }

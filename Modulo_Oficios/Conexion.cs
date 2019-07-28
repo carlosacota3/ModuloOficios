@@ -88,7 +88,27 @@ namespace Modulo_Oficios
                 //MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
             }
         }
+        // Llena el combo box Dependencias
+        public void llenarDependencias(ComboBox cb)
+        {
+            try
+            {
+                comand = new SqlCommand("Select * from Dependencia", conn);
+                dr = comand.ExecuteReader();
+                string resultado = "";
+                while (dr.Read())
+                {
+                    resultado = dr["id"].ToString() + "-" + dr["Nombre"].ToString();
+                    cb.Items.Add(resultado);
+                }
+                dr.Close();
 
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show("No se lleno el ComboBox " + ex.ToString());
+            }
+        }
         // Llena el combo box Estados
         public void llenarEstados(ComboBox cb)
         {
