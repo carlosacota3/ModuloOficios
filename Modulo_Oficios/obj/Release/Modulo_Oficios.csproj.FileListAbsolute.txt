@@ -16,3 +16,14 @@ C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Rel
 C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.csproj.GenerateResource.Cache
 C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.exe
 C:\Users\cesar\OneDrive\Documents\Carlitos\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.pdb
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\bin\Release\Modulo_Oficios.exe.config
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.exe
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.pdb
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\bin\Release\Modulo_Oficios.exe
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\bin\Release\Modulo_Oficios.pdb
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.csprojResolveAssemblyReference.cache
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.frm_oficios.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.frm_filtros.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.frm_reporte.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.Properties.Resources.resources
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.csproj.GenerateResource.Cache

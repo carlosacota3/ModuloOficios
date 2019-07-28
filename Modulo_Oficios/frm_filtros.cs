@@ -37,14 +37,16 @@ namespace Modulo_Oficios
             
             Conexion c = new Conexion();
             //Se especifica aun lado de cada atributo, de que tabla se van a extraer
-            string valores = "Oficio.id as 'Id', Oficio.Asunto, Oficio.Fecha_envio as 'Fecha Envio', Oficio.Fecha_recibido as 'Fecha Respuesta', Dependencia.Nombre as 'Dependencia', Tipo.Nombre as 'Tipo', Estado.Nombre as 'Estado'";
+            string valores = "Oficio.id AS 'Id', Oficio.Asunto, Oficio.Fecha_envio AS 'Fecha Envio', Oficio.Fecha_recibido AS 'Fecha Respuesta', Dependencia.Nombre AS 'Dependencia', Tipo.Nombre AS 'Tipo', Estado.Nombre AS 'Estado'";
             //Esta cadena funcionara como vista, para traer el NOMBRE y no el ID de Dependencia, Tipo y Estado
-            string from = "Oficio INNER JOIN ";
-            from += "	     Tipo ON Oficio.id_tipo = Tipo.id ";
+            string from = "Dependencia INNER JOIN ";
+            from += "	     dependencia_oficio ON Dependencia.id = dependencia_oficio.dependencia_id  ";
             from += "	   INNER JOIN ";
-            from += "         Dependencia ON Oficio.id_dependencia = Dependencia.id ";
+            from += "         Oficio ON Oficio.id = dependencia_oficio.oficio_id  ";
             from += "	   INNER JOIN ";
             from += "         Estado ON Oficio.id_estado = Estado.id";
+            from += "      INNER JOIN ";
+            from += "         Tipo ON Oficio.id_tipo = Tipo.id";
             if (where == "")
             {
                 tabla_filtrada = c.Select(valores, from);

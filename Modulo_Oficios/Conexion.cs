@@ -67,8 +67,8 @@ namespace Modulo_Oficios
             }
             return table;
         }
-        // Llena el combo box Dependencias
-        public void llenarDependencias(ComboBox cb)
+        // Llena el list box Dependencias
+        public void llenarDependencias(ListBox lb)
         {
             try
             {
@@ -78,7 +78,7 @@ namespace Modulo_Oficios
                 while(dr.Read())
                 {
                     resultado = dr["id"].ToString() + "-" + dr["Nombre"].ToString();
-                    cb.Items.Add(resultado);
+                    lb.Items.Add(resultado);
                 }
                 dr.Close();
 

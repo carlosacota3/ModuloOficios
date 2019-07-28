@@ -26,7 +26,7 @@ namespace Modulo_Oficios
             txt_id.Text = id_selecc;
             //Llenar ComboBox
             Conexion Conex = new Conexion();
-            Conex.llenarDependencias(cmb_dependencias);
+            Conex.llenarDependencias(lb_dependencias);
             Conex.llenarTipo(cmb_tipo);
             Conex.llenarEstados(cmb_estado);
             Conex.ConexionClose();
@@ -68,7 +68,7 @@ namespace Modulo_Oficios
                     dtp_recibido.Enabled = true;
                 else if (chb_fecha_respuesta.CheckState == CheckState.Unchecked)
                     dtp_recibido.Enabled = false;
-                cmb_dependencias.Enabled = true;
+                lb_dependencias.Enabled = true;
                 cmb_estado.Enabled = true;
                 cmb_tipo.Enabled = true;
                 btn_accion.ForeColor = Color.Black;
@@ -86,7 +86,7 @@ namespace Modulo_Oficios
                 txt_asunto.Enabled = false;
                 dtp_envio.Enabled = false;
                 dtp_recibido.Enabled = false;
-                cmb_dependencias.Enabled = false;
+                lb_dependencias.Enabled = false;
                 cmb_estado.Enabled = false;
                 cmb_tipo.Enabled = false;
                 btn_accion.ForeColor = Color.Black;
@@ -128,7 +128,7 @@ namespace Modulo_Oficios
         {
             txt_id.Clear();
             txt_asunto.Clear();
-            cmb_dependencias.SelectedIndex = -1;
+            lb_dependencias.ClearSelected();
             cmb_tipo.SelectedIndex = -1;
             cmb_estado.SelectedIndex = -1;
             dtp_envio.Value = DateTime.Today;
@@ -155,8 +155,7 @@ namespace Modulo_Oficios
                 {
                     //El asunto
                     txt_asunto.Text = rdr["Asunto"].ToString();
-                    //Guarda los Id de los 3 datos siguientes
-                    string id_dependencia = rdr["id_dependencia"].ToString();
+                    //Guarda los Id de los 2 datos siguientes
                     string id_tipo = rdr["id_tipo"].ToString();
                     string id_estado = rdr["id_estado"].ToString();
                     //Las fechas
@@ -171,19 +170,27 @@ namespace Modulo_Oficios
                         dtp_recibido.Enabled = false;
                     }
                     rdr.Close(); //Cerrar el datareader
-
+                    
                     //Muestra la Dependencia
-                    SqlCommand cmdDependencia = new SqlCommand("Select Nombre from Dependencia where id = " + id_dependencia + ";", c.conn);
-                    SqlDataReader reader = cmdDependencia.ExecuteReader();
-                    while (reader.Read())
+                    //Ahora consultamos las dependencias
+                    cmdConsultar = new SqlCommand("select dependencia_id from dependencia_oficio where oficio_id='" + txt_id.Text + "'", c.conn);
+                    rdr = cmdConsultar.ExecuteReader();
+                    
+                    if (rdr.HasRows)
                     {
-                        cmb_dependencias.Text = id_dependencia + "-" + reader["Nombre"].ToString();
+                        while (rdr.Read())
+                        {
+                            int index = lb_dependencias.FindString(rdr["dependencia_id"].ToString());
+                            if (index != -1)
+                                lb_dependencias.SetSelected(index, true);
+                            //SqlCommand cmdDependencia = new SqlCommand("Select Nombre from Dependencia where id = " + rdr["dependencia_id"].ToString() + ";", c.conn);
+                        }
                     }
-                    reader.Close();
+                    rdr.Close();
 
                     //Muestra el Tipo
                     SqlCommand cmdTipo = new SqlCommand("Select Nombre from Tipo where id = " + id_tipo + ";", c.conn);
-                    reader = cmdTipo.ExecuteReader();
+                    SqlDataReader reader = cmdTipo.ExecuteReader();
                     while (reader.Read())
                     {
                         cmb_tipo.Text = id_tipo + "-" + reader["Nombre"].ToString();
@@ -235,7 +242,7 @@ namespace Modulo_Oficios
                 {
                     MessageBox.Show("Falta ingresar el Asunto");
                 }
-                else if (cmb_dependencias.Text == "")
+                else if (lb_dependencias.SelectedItems == null)
                 {
                     MessageBox.Show("Falta seleccionar Dependencia");
                 }
@@ -282,17 +289,22 @@ namespace Modulo_Oficios
                     {
                         rdr.Close();//Se cierra el rdr que usamos para verificar el id
                         //Almacenar los datos en la BD
-
+                        string sqlDependencias = "";
                         //Si hay fecha de respuesta se guardara en la BD
                         if (chb_fecha_respuesta.CheckState == CheckState.Checked)
                         {
-                            sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, Fecha_recibido, id_dependencia, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @fecha_recibido, @dependencia, @tipo, @estado)";
-                            
+                            sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, Fecha_recibido, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @fecha_recibido, @tipo, @estado)";
                         }
                         else //Si no la hay, no se enviara nada
                         {
-                            sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, id_dependencia, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @dependencia, @tipo, @estado)";
+                            sql = "INSERT INTO Oficio (id, Asunto, Fecha_envio, id_tipo, id_estado) VALUES (@id, @asunto, @fecha_envio, @tipo, @estado)";
                         }
+                        //Agregamos las sentencias INSERT para las dependencias seleccionadas en el ListBox, a una variable
+                        foreach (var item in lb_dependencias.SelectedItems)
+                        {                     //Importante ese espacio al principio de la cadena
+                            sqlDependencias += " INSERT INTO dependencia_oficio (oficio_id, dependencia_id) VALUES (" + txt_id.Text + ", " + item.ToString() + ")";
+                        }
+
                         comando = new SqlCommand(sql, c.conn);
 
                         comando.Parameters.AddWithValue("@id", txt_id.Text);
@@ -300,15 +312,23 @@ namespace Modulo_Oficios
                         comando.Parameters.AddWithValue("@fecha_envio", dtp_envio.Value.Date);
                         if (chb_fecha_respuesta.CheckState == CheckState.Checked)
                             comando.Parameters.AddWithValue("@fecha_recibido", dtp_recibido.Value.Date);
-                        comando.Parameters.AddWithValue("@dependencia", obtenerId(cmb_dependencias.Text));
                         comando.Parameters.AddWithValue("@tipo", obtenerId(cmb_tipo.Text));
                         comando.Parameters.AddWithValue("@estado", obtenerId(cmb_estado.Text));
-                        comando.ExecuteNonQuery();
-                        MessageBox.Show("Registro Exitoso");
+                        try
+                        {
+                            comando.ExecuteNonQuery();
+                            comando = new SqlCommand(sqlDependencias, c.conn);
+                            comando.ExecuteNonQuery();
+                            MessageBox.Show("Registro Exitoso");
+                            //Limpiar campos
+                            limpiarCampos();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Fallo al realizar el registro");
+                        }
                         c.ConexionClose();
 
-                        //Limpiar campos
-                        limpiarCampos();
                     }
                 }
             }
@@ -325,7 +345,7 @@ namespace Modulo_Oficios
                 else if (datos_mostrados == true) //Aqui ya procede a eliminar
                 {
                     Conexion c = new Conexion();
-                    SqlCommand cmdConsultar = new SqlCommand("delete Oficio where Id = '" + txt_id.Text +"';", c.conn);
+                    SqlCommand cmdConsultar = new SqlCommand("delete dependencia_oficio where oficio_id = '" + txt_id.Text + "'; delete Oficio where Id = '" + txt_id.Text + "';", c.conn);
                     cmdConsultar.ExecuteNonQuery();
                     MessageBox.Show("Registro Borrado");
                     limpiarCampos(); //Limpiar campos
@@ -384,7 +404,7 @@ namespace Modulo_Oficios
                     dtp_recibido.Enabled = true;
                 else if (chb_fecha_respuesta.CheckState == CheckState.Unchecked)
                     dtp_recibido.Enabled = false;
-                cmb_dependencias.Enabled = true;
+                lb_dependencias.Enabled = true;
                 cmb_estado.Enabled = true;
                 cmb_tipo.Enabled = true;
                 btn_accion.ForeColor = Color.Black;

@@ -38,7 +38,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txt_id = new System.Windows.Forms.TextBox();
             this.txt_asunto = new System.Windows.Forms.TextBox();
-            this.cmb_dependencias = new System.Windows.Forms.ComboBox();
             this.cmb_tipo = new System.Windows.Forms.ComboBox();
             this.cmb_estado = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -54,6 +53,7 @@
             this.btn_limpiar = new System.Windows.Forms.Button();
             this.btn_accion = new System.Windows.Forms.Button();
             this.chb_fecha_respuesta = new System.Windows.Forms.CheckBox();
+            this.lb_dependencias = new System.Windows.Forms.ListBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -91,7 +91,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(57, 399);
+            this.label6.Location = new System.Drawing.Point(57, 379);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(92, 17);
             this.label6.TabIndex = 5;
@@ -101,7 +101,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(117, 455);
+            this.label7.Location = new System.Drawing.Point(117, 529);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(36, 17);
             this.label7.TabIndex = 6;
@@ -111,7 +111,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(471, 458);
+            this.label8.Location = new System.Drawing.Point(471, 532);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 17);
             this.label8.TabIndex = 7;
@@ -135,23 +135,13 @@
             this.txt_asunto.Size = new System.Drawing.Size(605, 62);
             this.txt_asunto.TabIndex = 2;
             // 
-            // cmb_dependencias
-            // 
-            this.cmb_dependencias.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_dependencias.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.cmb_dependencias.FormattingEnabled = true;
-            this.cmb_dependencias.Location = new System.Drawing.Point(170, 396);
-            this.cmb_dependencias.Name = "cmb_dependencias";
-            this.cmb_dependencias.Size = new System.Drawing.Size(565, 24);
-            this.cmb_dependencias.TabIndex = 5;
-            // 
             // cmb_tipo
             // 
             this.cmb_tipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_tipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmb_tipo.FormattingEnabled = true;
             this.cmb_tipo.ImeMode = System.Windows.Forms.ImeMode.Disable;
-            this.cmb_tipo.Location = new System.Drawing.Point(170, 452);
+            this.cmb_tipo.Location = new System.Drawing.Point(170, 526);
             this.cmb_tipo.Name = "cmb_tipo";
             this.cmb_tipo.Size = new System.Drawing.Size(191, 24);
             this.cmb_tipo.Sorted = true;
@@ -162,7 +152,7 @@
             this.cmb_estado.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmb_estado.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmb_estado.FormattingEnabled = true;
-            this.cmb_estado.Location = new System.Drawing.Point(544, 455);
+            this.cmb_estado.Location = new System.Drawing.Point(544, 529);
             this.cmb_estado.Name = "cmb_estado";
             this.cmb_estado.Size = new System.Drawing.Size(191, 24);
             this.cmb_estado.Sorted = true;
@@ -276,7 +266,7 @@
             this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btn_limpiar.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu;
             this.btn_limpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_limpiar.Location = new System.Drawing.Point(247, 589);
+            this.btn_limpiar.Location = new System.Drawing.Point(247, 658);
             this.btn_limpiar.Name = "btn_limpiar";
             this.btn_limpiar.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.btn_limpiar.Size = new System.Drawing.Size(362, 35);
@@ -292,7 +282,7 @@
             this.btn_accion.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
             this.btn_accion.Image = global::Modulo_Oficios.Properties.Resources.guardar_reducido;
             this.btn_accion.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_accion.Location = new System.Drawing.Point(247, 511);
+            this.btn_accion.Location = new System.Drawing.Point(247, 585);
             this.btn_accion.Name = "btn_accion";
             this.btn_accion.Size = new System.Drawing.Size(362, 52);
             this.btn_accion.TabIndex = 8;
@@ -314,13 +304,24 @@
             this.chb_fecha_respuesta.UseVisualStyleBackColor = true;
             this.chb_fecha_respuesta.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
+            // lb_dependencias
+            // 
+            this.lb_dependencias.FormattingEnabled = true;
+            this.lb_dependencias.ItemHeight = 20;
+            this.lb_dependencias.Location = new System.Drawing.Point(170, 379);
+            this.lb_dependencias.Name = "lb_dependencias";
+            this.lb_dependencias.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lb_dependencias.Size = new System.Drawing.Size(565, 104);
+            this.lb_dependencias.TabIndex = 35;
+            // 
             // frm_oficios
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(829, 658);
+            this.ClientSize = new System.Drawing.Size(829, 710);
+            this.Controls.Add(this.lb_dependencias);
             this.Controls.Add(this.chb_fecha_respuesta);
             this.Controls.Add(this.btn_regresar);
             this.Controls.Add(this.dtp_recibido);
@@ -331,7 +332,6 @@
             this.Controls.Add(this.btn_accion);
             this.Controls.Add(this.cmb_estado);
             this.Controls.Add(this.cmb_tipo);
-            this.Controls.Add(this.cmb_dependencias);
             this.Controls.Add(this.txt_asunto);
             this.Controls.Add(this.txt_id);
             this.Controls.Add(this.label8);
@@ -366,7 +366,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txt_id;
         private System.Windows.Forms.TextBox txt_asunto;
-        private System.Windows.Forms.ComboBox cmb_dependencias;
         private System.Windows.Forms.ComboBox cmb_tipo;
         private System.Windows.Forms.ComboBox cmb_estado;
         private System.Windows.Forms.Button btn_accion;
@@ -382,6 +381,7 @@
         private System.Windows.Forms.Button btn_regresar;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.CheckBox chb_fecha_respuesta;
+        private System.Windows.Forms.ListBox lb_dependencias;
     }
 }
 
