@@ -62,7 +62,7 @@ namespace Modulo_Oficios
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
+                MessageBox.Show(e.ToString());
                 table.Clear();
             }
             return table;

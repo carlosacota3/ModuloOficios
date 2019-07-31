@@ -16,7 +16,8 @@ namespace Modulo_Oficios
         //NOTA NOTA NOTA: todo lo que se nombre como f_recibido, en realidad deberia de ser f_respuesta
         //ya que hace referencia a la fecha de respuesta, antes fecha de recibido, pero por una actualizacion
         //se corrigio ese error y el nombre real es FECHA DE RESPUESTA
-        string id_seleccionado = ""; //El id que se seleccione del Data View Grid
+        string id_seleccionado = ""; //El id que se seleccione del Data Grid View
+        string dependencia_selec = ""; //La Dependencia que se seleccione del Data Grid View
                                                                                //f_recibido hace referencia a la Fecha de Respuesta
         bool dependencia = false, tipo = false, estado = false, f_envio = false, f_recibido = false, rango = false;
         DataTable tabla_filtrada = new DataTable();
@@ -37,16 +38,16 @@ namespace Modulo_Oficios
             
             Conexion c = new Conexion();
             //Se especifica aun lado de cada atributo, de que tabla se van a extraer
-            string valores = "Oficio.id AS 'Id', Oficio.Asunto, Oficio.Fecha_envio AS 'Fecha Envio', Oficio.Fecha_recibido AS 'Fecha Respuesta', Dependencia.Nombre AS 'Dependencia', Tipo.Nombre AS 'Tipo', Estado.Nombre AS 'Estado'";
+            string valores = "Oficio.id AS 'Id', Oficio.Asunto, Oficio.Fecha_envio AS 'Fecha Envio', Oficio_dependencia.Fecha_respuesta AS 'Fecha Respuesta', Dependencia.Nombre AS 'Dependencia', Tipo.Nombre AS 'Tipo', Estado.Nombre AS 'Estado'";
             //Esta cadena funcionara como vista, para traer el NOMBRE y no el ID de Dependencia, Tipo y Estado
-            string from = "Dependencia INNER JOIN ";
-            from += "	     dependencia_oficio ON Dependencia.id = dependencia_oficio.dependencia_id  ";
+            string from = "Oficio INNER JOIN ";
+            from += "	     Tipo ON Oficio.id_tipo = Tipo.id  ";
             from += "	   INNER JOIN ";
-            from += "         Oficio ON Oficio.id = dependencia_oficio.oficio_id  ";
+            from += "         Oficio_dependencia ON Oficio.id = Oficio_dependencia.oficio_id  ";
             from += "	   INNER JOIN ";
-            from += "         Estado ON Oficio.id_estado = Estado.id";
+            from += "         Estado ON Oficio_dependencia.estado_id = Estado.id";
             from += "      INNER JOIN ";
-            from += "         Tipo ON Oficio.id_tipo = Tipo.id";
+            from += "         Dependencia ON Oficio_dependencia.dependencia_id = Dependencia.id";
             if (where == "")
             {
                 tabla_filtrada = c.Select(valores, from);
@@ -160,15 +161,17 @@ namespace Modulo_Oficios
             if (e.RowIndex != -1)
             {
                 id_seleccionado = dgv_oficios.Rows[e.RowIndex].Cells[0].Value.ToString();
+                dependencia_selec = dgv_oficios.Rows[e.RowIndex].Cells[4].Value.ToString();
             }
         }
 
         private void abrir_abc_oficios(char accion)
         {
-            frm_oficios abc = new frm_oficios(id_seleccionado, accion);
+            frm_oficios abc = new frm_oficios(id_seleccionado, dependencia_selec, accion);
             Program.filtros.Hide(); //El "filtros" es el formulario frm_filtros, esto se especifico en el archivo "Program.cs"
             abc.Show();
             id_seleccionado = "";
+            dependencia_selec = "";
         }
 
         private void btn_agregar_Click(object sender, EventArgs e)
@@ -313,7 +316,7 @@ namespace Modulo_Oficios
                             salir = true;
                             if (dependencia == true)
                             {
-                                where += "id_dependencia = " + obtenerId(cmb_dependencias.Text);
+                                where += "dependencia_id = " + obtenerId(cmb_dependencias.Text);
                                 dependencia = false;
                                 salir = false;
                             }
@@ -325,7 +328,7 @@ namespace Modulo_Oficios
                             }
                             else if (estado == true)
                             {
-                                where += "id_estado = " + obtenerId(cmb_estado.Text);
+                                where += "Oficio_dependencia.estado_id = '" + obtenerId(cmb_estado.Text) + "'";
                                 estado = false;
                                 salir = false;
                             }
@@ -340,7 +343,7 @@ namespace Modulo_Oficios
                                 }
                                 else if (f_recibido == true)
                                 {
-                                    where += "Fecha_recibido >= '" + dtp_inicio.Value.Date.ToString("yyyy-MM-dd") + "' and Fecha_recibido <= '" + dtp_final.Value.Date.ToString("yyyy-MM-dd") + "'";
+                                    where += "Fecha_respuesta >= '" + dtp_inicio.Value.Date.ToString("yyyy-MM-dd") + "' and Fecha_respuesta <= '" + dtp_final.Value.Date.ToString("yyyy-MM-dd") + "'";
                                     f_recibido = false;
                                     rango = false;
                                     salir = false;
@@ -354,7 +357,7 @@ namespace Modulo_Oficios
                             }
                             else if (f_recibido == true)
                             {
-                                where += "Fecha_recibido = '" + dtp_inicio.Value.Date.ToString("yyyy-MM-dd") + "'";
+                                where += "Fecha_respuesta = '" + dtp_inicio.Value.Date.ToString("yyyy-MM-dd") + "'";
                                 f_recibido = false;
                                 salir = false;
                             }

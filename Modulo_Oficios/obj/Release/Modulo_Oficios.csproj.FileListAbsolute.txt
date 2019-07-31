@@ -27,3 +27,4 @@ C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.
 C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.frm_reporte.resources
 C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.Properties.Resources.resources
 C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.csproj.GenerateResource.Cache
+C:\Users\carlo\Desktop\Modulo_Oficios\Modulo_Oficios\obj\Release\Modulo_Oficios.frm_seleccion_dependencia.resources
