@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frm_filtros));
             this.dgv_oficios = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
@@ -46,13 +47,17 @@
             this.rb_f_recibido = new System.Windows.Forms.RadioButton();
             this.rb_f_envio = new System.Windows.Forms.RadioButton();
             this.btn_generar_rpt = new System.Windows.Forms.Button();
+            this.btn_limpiar = new System.Windows.Forms.Button();
+            this.btn_buscar = new System.Windows.Forms.Button();
             this.btn_modificar = new System.Windows.Forms.Button();
             this.btn_agregar = new System.Windows.Forms.Button();
             this.btn_eliminar = new System.Windows.Forms.Button();
-            this.btn_limpiar = new System.Windows.Forms.Button();
-            this.btn_buscar = new System.Windows.Forms.Button();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.smi_pantalla_completa = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarAExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_oficios)).BeginInit();
             this.groupBox2.SuspendLayout();
+            this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_oficios
@@ -253,6 +258,36 @@
             this.btn_generar_rpt.UseVisualStyleBackColor = true;
             this.btn_generar_rpt.Click += new System.EventHandler(this.btn_generar_rpt_Click);
             // 
+            // btn_limpiar
+            // 
+            this.btn_limpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
+            this.btn_limpiar.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu1;
+            this.btn_limpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_limpiar.Location = new System.Drawing.Point(417, 284);
+            this.btn_limpiar.Name = "btn_limpiar";
+            this.btn_limpiar.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.btn_limpiar.Size = new System.Drawing.Size(404, 36);
+            this.btn_limpiar.TabIndex = 15;
+            this.btn_limpiar.Text = "Limpiar";
+            this.btn_limpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_limpiar.UseVisualStyleBackColor = true;
+            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
+            // 
+            // btn_buscar
+            // 
+            this.btn_buscar.Image = global::Modulo_Oficios.Properties.Resources.lupa2_reducida1;
+            this.btn_buscar.Location = new System.Drawing.Point(418, 241);
+            this.btn_buscar.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_buscar.Name = "btn_buscar";
+            this.btn_buscar.Size = new System.Drawing.Size(403, 36);
+            this.btn_buscar.TabIndex = 14;
+            this.btn_buscar.Text = "Buscar";
+            this.btn_buscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btn_buscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btn_buscar.UseVisualStyleBackColor = true;
+            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            // 
             // btn_modificar
             // 
             this.btn_modificar.Image = global::Modulo_Oficios.Properties.Resources.lapiz_reducido;
@@ -295,41 +330,34 @@
             this.btn_eliminar.UseVisualStyleBackColor = true;
             this.btn_eliminar.Click += new System.EventHandler(this.btn_eliminar_Click);
             // 
-            // btn_limpiar
+            // contextMenuStrip1
             // 
-            this.btn_limpiar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btn_limpiar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.btn_limpiar.Image = global::Modulo_Oficios.Properties.Resources.reinicio_redu1;
-            this.btn_limpiar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_limpiar.Location = new System.Drawing.Point(417, 284);
-            this.btn_limpiar.Name = "btn_limpiar";
-            this.btn_limpiar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btn_limpiar.Size = new System.Drawing.Size(404, 36);
-            this.btn_limpiar.TabIndex = 15;
-            this.btn_limpiar.Text = "Limpiar";
-            this.btn_limpiar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_limpiar.UseVisualStyleBackColor = true;
-            this.btn_limpiar.Click += new System.EventHandler(this.btn_limpiar_Click);
+            this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smi_pantalla_completa,
+            this.exportarAExcelToolStripMenuItem});
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 70);
+            this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
-            // btn_buscar
+            // smi_pantalla_completa
             // 
-            this.btn_buscar.Image = global::Modulo_Oficios.Properties.Resources.lupa2_reducida1;
-            this.btn_buscar.Location = new System.Drawing.Point(418, 241);
-            this.btn_buscar.Margin = new System.Windows.Forms.Padding(4);
-            this.btn_buscar.Name = "btn_buscar";
-            this.btn_buscar.Size = new System.Drawing.Size(403, 36);
-            this.btn_buscar.TabIndex = 14;
-            this.btn_buscar.Text = "Buscar";
-            this.btn_buscar.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btn_buscar.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btn_buscar.UseVisualStyleBackColor = true;
-            this.btn_buscar.Click += new System.EventHandler(this.btn_buscar_Click);
+            this.smi_pantalla_completa.Name = "smi_pantalla_completa";
+            this.smi_pantalla_completa.Size = new System.Drawing.Size(229, 22);
+            this.smi_pantalla_completa.Text = "Mostrar en pantalla completa";
+            this.smi_pantalla_completa.Click += new System.EventHandler(this.smi_pantalla_completa_Click);
+            // 
+            // exportarAExcelToolStripMenuItem
+            // 
+            this.exportarAExcelToolStripMenuItem.Name = "exportarAExcelToolStripMenuItem";
+            this.exportarAExcelToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
+            this.exportarAExcelToolStripMenuItem.Text = "Exportar a Excel";
             // 
             // frm_filtros
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(855, 710);
+            this.ContextMenuStrip = this.contextMenuStrip1;
             this.Controls.Add(this.btn_generar_rpt);
             this.Controls.Add(this.btn_limpiar);
             this.Controls.Add(this.btn_buscar);
@@ -355,6 +383,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_oficios)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.contextMenuStrip1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -384,5 +413,8 @@
         private System.Windows.Forms.Label lbl_fecha_inicio;
         private System.Windows.Forms.CheckBox chb_rango;
         private System.Windows.Forms.Button btn_generar_rpt;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem smi_pantalla_completa;
+        private System.Windows.Forms.ToolStripMenuItem exportarAExcelToolStripMenuItem;
     }
 }

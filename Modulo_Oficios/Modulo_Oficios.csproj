@@ -72,10 +72,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="DataGridViewCellEventArgs.cs" />
     <Compile Include="Data_Set.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Data_Set.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frm_max_datagrid_oficios.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frm_max_datagrid_oficios.Designer.cs">
+      <DependentUpon>frm_max_datagrid_oficios.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_oficios.cs">
       <SubType>Form</SubType>
@@ -114,6 +121,9 @@
       <DependentUpon>reporte_oficios.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <EmbeddedResource Include="frm_max_datagrid_oficios.resx">
+      <DependentUpon>frm_max_datagrid_oficios.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frm_oficios.resx">
       <DependentUpon>frm_oficios.cs</DependentUpon>
     </EmbeddedResource>

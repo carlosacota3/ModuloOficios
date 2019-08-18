@@ -388,5 +388,24 @@ namespace Modulo_Oficios
             r.Show();
             //Program.filtros.Hide(); //El "filtros" es el formulario frm_filtros, esto se especifico en el archivo "Program.cs"
         }
+
+        private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
+        {
+
+        }
+
+        private void smi_pantalla_completa_Click(object sender, EventArgs e)
+        {
+            frm_max_datagrid_oficios md = new frm_max_datagrid_oficios(tabla_filtrada);
+            md.ShowDialog();
+            if (md.row_seleccionada != -1)
+            {
+                dgv_oficios.ClearSelection();
+                dgv_oficios.Rows[md.row_seleccionada].Selected = true;
+                id_seleccionado = dgv_oficios.Rows[md.row_seleccionada].Cells[0].Value.ToString();
+                dependencia_selec = dgv_oficios.Rows[md.row_seleccionada].Cells[4].Value.ToString();
+            }
+            md.Dispose();
+        }
     }
 }
