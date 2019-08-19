@@ -54,7 +54,6 @@
             this.btn_eliminar = new System.Windows.Forms.Button();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.smi_pantalla_completa = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportarAExcelToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_oficios)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -333,10 +332,9 @@
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smi_pantalla_completa,
-            this.exportarAExcelToolStripMenuItem});
+            this.smi_pantalla_completa});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 70);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(230, 48);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // smi_pantalla_completa
@@ -345,12 +343,6 @@
             this.smi_pantalla_completa.Size = new System.Drawing.Size(229, 22);
             this.smi_pantalla_completa.Text = "Mostrar en pantalla completa";
             this.smi_pantalla_completa.Click += new System.EventHandler(this.smi_pantalla_completa_Click);
-            // 
-            // exportarAExcelToolStripMenuItem
-            // 
-            this.exportarAExcelToolStripMenuItem.Name = "exportarAExcelToolStripMenuItem";
-            this.exportarAExcelToolStripMenuItem.Size = new System.Drawing.Size(229, 22);
-            this.exportarAExcelToolStripMenuItem.Text = "Exportar a Excel";
             // 
             // frm_filtros
             // 
@@ -415,6 +407,5 @@
         private System.Windows.Forms.Button btn_generar_rpt;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem smi_pantalla_completa;
-        private System.Windows.Forms.ToolStripMenuItem exportarAExcelToolStripMenuItem;
     }
 }
