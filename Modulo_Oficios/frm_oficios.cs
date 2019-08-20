@@ -400,18 +400,37 @@ namespace Modulo_Oficios
                         comando.Parameters.AddWithValue("@asunto", txt_asunto.Text);
                         comando.Parameters.AddWithValue("@fecha_envio", dtp_envio.Value.Date);
                         comando.Parameters.AddWithValue("@tipo", obtenerId(cmb_tipo.Text));
+                        
+                        int rowsAffected = 0;
+                        //Insertamos en la tabla Oficio
                         try
                         {
-                            SqlCommand comandoDeps = new SqlCommand(sqlDependencias, c.conn);
-                            comando.ExecuteNonQuery();
-                            comandoDeps.ExecuteNonQuery();
-                            MessageBox.Show("Registro Exitoso");
-                            //Limpiar campos
-                            limpiarCampos();
+                            rowsAffected = comando.ExecuteNonQuery();
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Fallo al realizar el registro.  \n" + ex.ToString());
+                        }
+
+                        //Insertamos las diferentes dependencias en la tabla Oficio_dependencia
+                        if (rowsAffected == 1)
+                        {
+                            try
+                            {
+                                SqlCommand comandoDeps = new SqlCommand(sqlDependencias, c.conn);
+                                comandoDeps.ExecuteNonQuery();
+                                MessageBox.Show("Registro Exitoso");
+                                //Limpiar campos
+                                limpiarCampos();
+                            }
+                            catch (Exception ex)
+                            {
+                                MessageBox.Show("Fallo al realizar el registro.  \n" + ex.ToString());
+                                //En caso de no realizarse la insercion en la segunda tabla se borra el contenido en la primera tabla
+                                //pero sin limpiar campos del form para dar la oportunidad de volver a intentarlo
+                                SqlCommand cmd = new SqlCommand("delete Oficio where id = '" + txt_id.Text + "';", c.conn);
+                                cmd.ExecuteNonQuery();
+                            }
                         }
                         c.ConexionClose();
 
